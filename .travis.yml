@@ -1,0 +1,21 @@
+language: scala
+sudo: false
+script:
+- sbt test genAndCheckHtml genHtmlPublish fullOptJS
+after_success:
+- echo -e "Host github.com\n\tStrictHostKeyChecking no\nIdentityFile ~/.ssh/deploy.key\n"
+  >> ~/.ssh/config
+- openssl aes-256-cbc -k "$SERVER_KEY" -in deploy_key.enc -d -a -out deploy.key
+- cp deploy.key ~/.ssh/
+- chmod 600 ~/.ssh/deploy.key
+- git config --global user.email "6b656e6a69@gmail.com"
+- git config --global user.name "xuwei-k"
+- mkdir ../tmp && mv index.html ../tmp/ && mv ./js/target/scala-2.11/scalajspack-opt.js
+  ../tmp/scalajspack.js && git fetch origin gh-pages:gh-pages && git clean -fdx &&
+  git checkout gh-pages && rm -rf ./* && cp -r ../tmp/* ./ && git add . && git commit
+  -a -m "auto commit on travis $TRAVIS_JOB_NUMBER $TRAVIS_COMMIT"
+- if [[ "${TRAVIS_BRANCH}" == "master" && "${TRAVIS_PULL_REQUEST}" == "false" ]];
+  then git push git@github.com:xuwei-k/scalajspack.git gh-pages:gh-pages ; fi
+env:
+  global:
+    secure: Vzj4z+qI6XhLaa3J9cnkG8gvFTWfCtkXw9RyGjhHvsx5ihC1o150/F5Znlex9IiPxH+vN0KT7kzrzrrTAY9mUh5Lp8qjdae2NHPHoa97Ze40j8xEVDAMmwNy76MVP05XShk4y45gHlcfFLL0KA/ro9pm/SLG6rAiojHIguL3otAHLpx03uQROAIGA54L8a70jA9gXskDhnWrftZgUOxaE+Dt8D1rJaQ8RWLZ+O0ihYKazmQAKQidNO17HeKYd67BzESc4oZr3OJghTHQX2GmcrN20jnqHzldm/wFZkK4S5Cgb0PFinh/iczIn8y/TDLZXs9KtO1u0Dwt9+zVEPDwgzlbm3Ie3WFQcGxBZLfzEhUJCQj4qczsDy+qv9gUQ3U3oPrbPug4zCEv49SIwdE/jY43+SItNBPTu34eDmkbd0e92ZUTAldhZMq5BqkAS60MKzy+Ksex32XbcIqElbuhUkTMtooWaG+UYWDbaDTwgHp6rC4RACQUsLsp5FSpjYxB4vdUrY6F062iIk++csGCwXLQ6NMgxeG6wM7TRordScaurxUdQXwU+QesWLbrLZXW09Iqt4PMhtC9vFecg8rZYMpBwXXfkBHMRfN2/4htEZucKi6ZZpto4FTFZx/8DtE+9WhyLBAL5/j+BHz5MT/gT8xy7WXvTn+cox6dkrAPRdg=
