@@ -1,7 +1,13 @@
 language: scala
 sudo: false
+cache:
+  directories:
+  - $HOME/.ivy2/cache
+  - $HOME/.sbt/launchers
 script:
 - sbt test genAndCheckHtml genHtmlPublish fullOptJS
+- find $HOME/.ivy2/cache -name "ivydata-*.properties" | xargs rm
+- find $HOME/.ivy2/cache -name "*SNAPSHOT*" | xargs rm -rf
 after_success:
 - echo -e "Host github.com\n\tStrictHostKeyChecking no\nIdentityFile ~/.ssh/deploy.key\n"
   >> ~/.ssh/config
