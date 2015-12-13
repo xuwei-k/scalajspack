@@ -31,7 +31,7 @@ def gen(js: String) = s"""<!DOCTYPE html>
   <body>
     <div>
       <textarea id="input_js" style="height: 200px; width: 400px;">{"aaa": [true, 1000, null]}</textarea>
-      <button>convert</button>
+      <button id="convert_button">convert</button>
     </div>
     <div>
       <pre id="output_msgpack"></pre>
@@ -59,7 +59,7 @@ $$(function(){
     }
   });
 
-  $$("#input_js").click(function(){
+  $$("#convert_button").click(function(){
     run();
   });
 
