@@ -29,6 +29,7 @@ def gen(js: String) = s"""<!DOCTYPE html>
     <script type="text/javascript" src="http://code.jquery.com/jquery-2.1.4.min.js"></script>
   </head>
   <body>
+    <p><a target="_brank" href="https://github.com/xuwei-k/scalajspack">https://github.com/xuwei-k/scalajspack</a></p>
     <div>
       <textarea id="input_js" style="height: 200px; width: 400px;">{"aaa": [true, 1000, null]}</textarea>
       <button id="convert_button">convert</button>
