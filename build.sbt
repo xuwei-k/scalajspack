@@ -30,7 +30,7 @@ lazy val scalajspack = crossProject.in(file(".")).settings(
     Nil
   ) ::: unusedWarnings,
   libraryDependencies ++= (
-    ("com.github.pocketberserker" %%% "scodec-msgpack" % "0.4.1") ::
+    ("com.github.pocketberserker" %%% "scodec-msgpack" % "0.4.2") ::
     ("io.circe" %%% "circe-parse" % circeVersion) ::
     Nil
   )
@@ -40,7 +40,7 @@ lazy val scalajspack = crossProject.in(file(".")).settings(
   ) : _*
 ).jvmSettings(
   scalapropsSettings ++ Seq(
-    scalapropsVersion := "0.2.0"
+    scalapropsVersion := "0.2.1"
   ) : _*
 ).jsSettings(
 )
