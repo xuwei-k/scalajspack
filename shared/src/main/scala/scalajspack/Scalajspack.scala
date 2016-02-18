@@ -14,7 +14,7 @@ final class Scalajspack(serialize: Serialize[Json] = Scalajspack.default) {
     }
 
   def jsonString2msgpackBitVector(json: String): Attempt[BitVector] =
-    io.circe.parse.parse(json) match {
+    io.circe.parser.parse(json) match {
       case Xor.Left(a) => throw a
       case Xor.Right(a) =>
         json2msgpackBitVector(a)
