@@ -70,5 +70,5 @@ object ScalajspackTest extends Scalaprops {
     r
   }
 
-  override val param = super.param.copy(minSuccessful = 10000)
+  override val param = super.param.copy(minSuccessful = 1000)
 }
