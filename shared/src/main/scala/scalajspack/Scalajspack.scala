@@ -3,7 +3,7 @@ package scalajspack
 import scodec.{Attempt, Err}
 import io.circe.Json
 import scodec.msgpack._
-import scodec.bits.{BitVector, ByteVector}
+import scodec.bits.BitVector
 import cats.data.Xor
 
 final class Scalajspack(serialize: Serialize[Json] = Scalajspack.default) {

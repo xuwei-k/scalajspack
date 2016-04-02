@@ -2,7 +2,6 @@ package scalajspack
 
 import io.circe.{Json, JsonObject}
 import scodec.Attempt
-import scodec.msgpack.Serialize
 import scalaprops.{Scalaprops, Property, Gen}
 
 object ScalajspackTest extends Scalaprops {
