@@ -46,7 +46,7 @@ object Scalajspack {
     private[this] val MTrueSuccess = Attempt.successful(MTrue)
     private[this] val MFalseSuccess = Attempt.successful(MFalse)
 
-    private[this] val NilSuccess = Attempt.successful(Json.empty)
+    private[this] val NilSuccess = Attempt.successful(Json.Null)
     private[this] val TrueSuccess = Attempt.successful(Json.True)
     private[this] val FalseSuccess = Attempt.successful(Json.False)
 
@@ -68,8 +68,8 @@ object Scalajspack {
     )
 
     def unpack(value: MessagePack): Attempt[Json] = {
-      def long(i: Long) = Attempt.successful(Json.long(i))
-      def string(i: String) = Attempt.successful(Json.string(i))
+      def long(i: Long) = Attempt.successful(Json.fromLong(i))
+      def string(i: String) = Attempt.successful(Json.fromString(i))
       def array(a: Vector[MessagePack]) = a match {
         case h +: t =>
           t.foldLeft(unpack(h).map(Vector(_))){
@@ -79,7 +79,7 @@ object Scalajspack {
             } yield x :+ y
           }.map(Json.fromValues(_))
         case _ =>
-          Attempt.successful(Json.array())
+          Attempt.successful(Json.arr())
       }
       def map(m: Map[MessagePack, MessagePack]) = Attempt.successful(
         Json.fromFields(
@@ -108,8 +108,8 @@ object Scalajspack {
         case MBinary8(n) => options.binary(n)
         case MBinary16(n) => options.binary(n)
         case MBinary32(n) => options.binary(n)
-        case MFloat32(f) => Attempt.fromOption(Json.number(f), Err(f.toString)) // TODO use UnpackOptions
-        case MFloat64(f) => Attempt.fromOption(Json.number(f), Err(f.toString)) // TODO use UnpackOptions
+        case MFloat32(f) => Attempt.fromOption(Json.fromDouble(f), Err(f.toString)) // TODO use UnpackOptions
+        case MFloat64(f) => Attempt.fromOption(Json.fromDouble(f), Err(f.toString)) // TODO use UnpackOptions
         case MUInt8(i) => long(i)
         case MUInt16(i) => long(i)
         case MUInt32(i) => long(i)
