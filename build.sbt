@@ -6,7 +6,7 @@ lazy val root = project.in(file(".")).aggregate(
   publishLocal := {}
 )
 
-val circeVersion = "0.4.1"
+val circeVersion = "0.5.1"
 
 val unusedWarnings = (
   "-Ywarn-unused" ::
@@ -30,7 +30,7 @@ lazy val scalajspack = crossProject.in(file(".")).settings(
     Nil
   ) ::: unusedWarnings,
   libraryDependencies ++= (
-    ("com.github.scalaprops" %%% "scalaprops" % "0.3.3" % "test") ::
+    ("com.github.scalaprops" %%% "scalaprops" % "0.3.4" % "test") ::
     ("com.github.pocketberserker" %%% "scodec-msgpack" % "0.6.0") ::
     ("io.circe" %%% "circe-parser" % circeVersion) ::
     Nil
