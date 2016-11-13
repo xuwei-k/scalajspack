@@ -6,7 +6,7 @@ lazy val root = project.in(file(".")).aggregate(
   publishLocal := {}
 )
 
-val circeVersion = "0.5.1"
+val circeVersion = "0.6.0"
 
 val unusedWarnings = (
   "-Ywarn-unused" ::
@@ -16,7 +16,7 @@ val unusedWarnings = (
 
 lazy val scalajspack = crossProject.in(file(".")).settings(
   name := "scalajspack",
-  scalaVersion := "2.11.8",
+  scalaVersion := "2.12.0",
   fullResolvers ~= {_.filterNot(_.name == "jcenter")},
   licenses := Seq("MIT License" -> url("http://opensource.org/licenses/mit-license")),
   scalacOptions ++= (

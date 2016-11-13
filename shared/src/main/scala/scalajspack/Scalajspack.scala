@@ -4,7 +4,6 @@ import scodec.{Attempt, Err}
 import io.circe.Json
 import scodec.msgpack._
 import scodec.bits.BitVector
-import cats.data.Xor
 
 final class Scalajspack(serialize: Serialize[Json] = Scalajspack.default) {
 
@@ -15,8 +14,8 @@ final class Scalajspack(serialize: Serialize[Json] = Scalajspack.default) {
 
   def jsonString2msgpackBitVector(json: String): Attempt[BitVector] =
     io.circe.parser.parse(json) match {
-      case Xor.Left(a) => throw a
-      case Xor.Right(a) =>
+      case Left(a) => throw a
+      case Right(a) =>
         json2msgpackBitVector(a)
     }
 

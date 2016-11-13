@@ -1,5 +1,6 @@
 language: scala
 sudo: false
+jdk: oraclejdk8
 cache:
   directories:
   - $HOME/.ivy2/cache
@@ -16,7 +17,7 @@ after_success:
 - chmod 600 ~/.ssh/deploy.key
 - git config --global user.email "6b656e6a69@gmail.com"
 - git config --global user.name "xuwei-k"
-- mkdir ../tmp && mv index.html ../tmp/ && mv ./js/target/scala-2.11/scalajspack-opt.js
+- mkdir ../tmp && mv index.html ../tmp/ && mv ./js/target/scala-2.12/scalajspack-opt.js
   ../tmp/scalajspack.js && git fetch origin gh-pages:gh-pages && git clean -fdx &&
   git checkout gh-pages && rm -rf ./* && cp -r ../tmp/* ./ && git add . && git commit
   -a -m "auto commit on travis $TRAVIS_JOB_NUMBER $TRAVIS_COMMIT"

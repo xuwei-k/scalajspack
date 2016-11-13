@@ -1,7 +1,7 @@
 val genHtmlLocal = TaskKey[Unit]("genHtmlLocal")
 
 genHtmlLocal := {
-  val js = "./js/target/scala-2.11/scalajspack-fastopt.js"
+  val js = "./js/target/scala-2.12/scalajspack-fastopt.js"
   val html = gen(js)
   IO.write(file("index.html"), html)
 }
