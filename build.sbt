@@ -34,13 +34,11 @@ lazy val scalajspack = crossProject.in(file(".")).settings(
     ("com.github.pocketberserker" %%% "scodec-msgpack" % "0.6.0") ::
     ("io.circe" %%% "circe-parser" % circeVersion) ::
     Nil
-  )
-).settings(
+  ),
   Seq(Compile, Test).flatMap(c =>
     scalacOptions in (c, console) ~= {_.filterNot(unusedWarnings.toSet)}
-  ) : _*
-).settings(
-  scalapropsCoreSettings : _*
+  ),
+  scalapropsCoreSettings
 ).jsSettings(
   scalacOptions += {
     val a = (baseDirectory in LocalRootProject).value.toURI.toString
