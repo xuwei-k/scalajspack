@@ -20,6 +20,8 @@ TaskKey[Unit]("genHtmlPublish") := {
   IO.write(file("index.html"), html)
 }
 
+val codeMirrorURL = "http://cdnjs.cloudflare.com/ajax/libs/codemirror/5.22.2/"
+
 def gen(js: String) = s"""<!DOCTYPE html>
 <html>
   <head>
@@ -27,6 +29,9 @@ def gen(js: String) = s"""<!DOCTYPE html>
     <title>scalajspack - JSON to MessagePack converter powered by scala-js</title>
     <script type="text/javascript" src="${js}"></script>
     <script type="text/javascript" src="http://code.jquery.com/jquery-2.1.4.min.js"></script>
+    <link rel="stylesheet" href="${codeMirrorURL}/codemirror.css">
+    <script src="${codeMirrorURL}/codemirror.js"></script>
+    <script src="${codeMirrorURL}/mode/javascript/javascript.js"></script>
   </head>
   <body>
     <p><a target="_brank" href="https://github.com/xuwei-k/scalajspack">https://github.com/xuwei-k/scalajspack</a></p>
@@ -42,11 +47,16 @@ def gen(js: String) = s"""<!DOCTYPE html>
 
 <script type="text/javascript">
 $$(function(){
+  var cm = CodeMirror.fromTextArea(document.getElementById("input_js"), {
+    lineNumbers: true,
+    mode: "javascript"
+  });
+
   var run = function(){
     try{
       var a = new scalajspack.Main
-      var r = a.convert($$("#input_js").val());
-      $$("#output_msgpack").text(r); 
+      var r = a.convert(cm.getValue());
+      $$("#output_msgpack").text(r);
       $$("#error").text("");
     }catch(e){
       $$("#error").text(e);
@@ -54,11 +64,7 @@ $$(function(){
     }
   };
 
-  $$("#input_js").keyup(function(event){
-    if(event.keyCode == 13){
-      run();
-    }
-  });
+  cm.on("change", run);
 
   $$("#convert_button").click(function(){
     run();
