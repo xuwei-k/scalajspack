@@ -30,8 +30,7 @@ $(function(){
 
   var run = function(){
     try{
-      var a = new scalajspack.Main
-      var r = a.convert(cm.getValue());
+      var r = scalajspack.Main.convert(cm.getValue());
       $("#output_msgpack").text(r);
       $("#error").text("");
     }catch(e){
