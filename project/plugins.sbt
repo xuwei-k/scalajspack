@@ -1,4 +1,4 @@
-addSbtPlugin("org.scala-js" % "sbt-scalajs" % "0.6.14")
+addSbtPlugin("org.scala-js" % "sbt-scalajs" % "0.6.16")
 addSbtPlugin("com.github.scalaprops" % "sbt-scalaprops" % "0.2.0")
 
 scalacOptions ++= (

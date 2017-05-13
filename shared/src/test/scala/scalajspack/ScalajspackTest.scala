@@ -6,13 +6,16 @@ import scalaprops.{Scalaprops, Property, Gen}
 
 object ScalajspackTest extends Scalaprops {
 
-  private[this] implicit val scalaDoubleGen: Gen[Double] =
+  private[this] implicit val scalaDoubleGen: Gen[Double] = {
+    val minusZero = java.lang.Double.doubleToLongBits(-0.0)
     Gen[Long].map { n =>
       java.lang.Double.longBitsToDouble(n) match {
         case x if x.isNaN => n
+        case _ if n == minusZero => 0.0
         case x => x
       }
     }
+  }
 
   private[this] implicit val bigDecimalGen: Gen[BigDecimal] =
     Gen[Double].map(BigDecimal(_))
