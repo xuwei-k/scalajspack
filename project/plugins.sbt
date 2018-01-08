@@ -1,5 +1,5 @@
-addSbtPlugin("org.scala-js" % "sbt-scalajs" % "0.6.20")
-addSbtPlugin("com.github.scalaprops" % "sbt-scalaprops" % "0.2.3")
+addSbtPlugin("org.scala-js" % "sbt-scalajs" % "0.6.21")
+addSbtPlugin("com.github.scalaprops" % "sbt-scalaprops" % "0.2.4")
 
 scalacOptions ++= (
   "-deprecation" ::
