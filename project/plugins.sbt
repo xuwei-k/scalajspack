@@ -1,10 +1,9 @@
-addSbtPlugin("org.scala-js" % "sbt-scalajs" % "0.6.21")
-addSbtPlugin("com.github.scalaprops" % "sbt-scalaprops" % "0.2.4")
+addSbtPlugin("org.scala-js" % "sbt-scalajs" % "0.6.22")
+addSbtPlugin("com.github.scalaprops" % "sbt-scalaprops" % "0.2.5")
 
 scalacOptions ++= (
   "-deprecation" ::
   "-unchecked" ::
-  "-Xlint" ::
   "-language:existentials" ::
   "-language:higherKinds" ::
   "-language:implicitConversions" ::
