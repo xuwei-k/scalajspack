@@ -20,7 +20,7 @@ TaskKey[Unit]("genHtmlPublish") := {
   IO.write(file("index.html"), html)
 }
 
-val codeMirrorURL = "http://cdnjs.cloudflare.com/ajax/libs/codemirror/5.22.2/"
+val codeMirrorURL = "https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.22.2/"
 
 def gen(js: String) = s"""<!DOCTYPE html>
 <html>
@@ -28,7 +28,7 @@ def gen(js: String) = s"""<!DOCTYPE html>
     <meta charset="UTF-8">
     <title>scalajspack - JSON to MessagePack converter powered by scala-js</title>
     <script type="text/javascript" src="${js}"></script>
-    <script type="text/javascript" src="http://code.jquery.com/jquery-2.1.4.min.js"></script>
+    <script type="text/javascript" src="https://code.jquery.com/jquery-2.1.4.min.js"></script>
     <link rel="stylesheet" href="${codeMirrorURL}/codemirror.css">
     <script src="${codeMirrorURL}/codemirror.js"></script>
     <script src="${codeMirrorURL}/mode/javascript/javascript.js"></script>

@@ -18,7 +18,7 @@ lazy val scalajspack = crossProject.in(file(".")).settings(
   name := "scalajspack",
   scalaVersion := "2.12.4",
   fullResolvers ~= {_.filterNot(_.name == "jcenter")},
-  licenses := Seq("MIT License" -> url("http://opensource.org/licenses/mit-license")),
+  licenses := Seq("MIT License" -> url("https://opensource.org/licenses/mit-license")),
   scalacOptions ++= (
     "-deprecation" ::
     "-unchecked" ::

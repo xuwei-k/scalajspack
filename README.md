@@ -2,7 +2,7 @@
 
 [![Build Status](https://travis-ci.org/xuwei-k/scalajspack.svg)](https://travis-ci.org/xuwei-k/scalajspack)
 
-<http://xuwei-k.github.io/scalajspack>
+<https://xuwei-k.github.io/scalajspack>
 
 ```
 sbt fastOptJS
