@@ -10,7 +10,6 @@ val circeVersion = "0.9.1"
 
 val unusedWarnings = (
   "-Ywarn-unused" ::
-  "-Ywarn-unused-import" ::
   Nil
 )
 
