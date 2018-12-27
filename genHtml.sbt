@@ -20,7 +20,7 @@ TaskKey[Unit]("genHtmlPublish") := {
   IO.write(file("index.html"), html)
 }
 
-val codeMirrorURL = "https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.22.2/"
+val codeMirrorURL = "https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.42.2"
 
 def gen(js: String) = s"""<!DOCTYPE html>
 <html>
