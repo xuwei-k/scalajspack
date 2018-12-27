@@ -1,3 +1,5 @@
+import sbtcrossproject.crossProject
+
 lazy val root = project.in(file(".")).aggregate(
   scalajspackJS,
   scalajspackJVM
@@ -13,7 +15,7 @@ val unusedWarnings = (
   Nil
 )
 
-lazy val scalajspack = crossProject.in(file(".")).settings(
+lazy val scalajspack = crossProject(JSPlatform, JVMPlatform).in(file(".")).settings(
   name := "scalajspack",
   scalaVersion := "2.12.4",
   fullResolvers ~= {_.filterNot(_.name == "jcenter")},
