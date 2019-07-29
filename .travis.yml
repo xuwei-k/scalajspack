@@ -1,10 +1,6 @@
 language: scala
 sudo: false
-jdk: oraclejdk8
-addons:
-  apt:
-    packages:
-    - oracle-java8-installer
+jdk: openjdk8
 cache:
   directories:
   - $HOME/.ivy2/cache
