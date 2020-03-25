@@ -54,7 +54,7 @@ $$(function(){
 
   var run = function(){
     try{
-      var r = scalajspack.Main.convert(cm.getValue());
+      var r = ScalajspackMain.convert(cm.getValue());
       $$("#output_msgpack").text(r);
       $$("#error").text("");
     }catch(e){

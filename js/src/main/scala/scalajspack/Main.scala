@@ -2,7 +2,7 @@ package scalajspack
 
 import scala.scalajs.js.annotation._
 
-@JSExportTopLevel("scalajspack.Main")
+@JSExportTopLevel("ScalajspackMain")
 object Main{
   @JSExport
   def convert(json: String): String = {

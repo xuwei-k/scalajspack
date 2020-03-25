@@ -17,7 +17,7 @@ val unusedWarnings = (
 
 lazy val scalajspack = crossProject(JSPlatform, JVMPlatform).in(file(".")).settings(
   name := "scalajspack",
-  scalaVersion := "2.12.8",
+  scalaVersion := "2.12.11",
   fullResolvers ~= {_.filterNot(_.name == "jcenter")},
   licenses := Seq("MIT License" -> url("https://opensource.org/licenses/mit-license")),
   scalacOptions ++= (
@@ -32,7 +32,7 @@ lazy val scalajspack = crossProject(JSPlatform, JVMPlatform).in(file(".")).setti
   ) ::: unusedWarnings,
   libraryDependencies ++= (
     ("com.github.scalaprops" %%% "scalaprops" % "0.6.3" % "test") ::
-    ("com.github.pocketberserker" %%% "scodec-msgpack" % "0.6.0") ::
+    ("com.github.xuwei-k" %%% "scodec-msgpack" % "0.8.0") ::
     ("io.circe" %%% "circe-parser" % circeVersion) ::
     Nil
   ),
