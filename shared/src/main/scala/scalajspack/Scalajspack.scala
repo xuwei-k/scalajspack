@@ -92,7 +92,7 @@ object Scalajspack {
                     options.nonStringKey(x)
                 }
               }.require -> unpack(v).require
-          }(collection.breakOut)
+          }
         ) // TODO should not use require inside map
       )
 
