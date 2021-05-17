@@ -27,7 +27,7 @@ jobs:
         mv ./js/target/scala-2.13/scalajspack-opt.js ./deploy-tmp/scalajspack.js
         mv ./js/target/scala-2.13/scalajspack-opt.js.map ./deploy-tmp/scalajspack-opt.js.map
     - if: ${{ !github.event.repository.fork && github.ref == 'refs/heads/master' && github.event_name == 'push' }}
-      uses: JamesIves/github-pages-deploy-action@4.1.1
+      uses: JamesIves/github-pages-deploy-action@4.1.3
       with:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         BRANCH: gh-pages
