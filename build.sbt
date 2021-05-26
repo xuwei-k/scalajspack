@@ -8,7 +8,7 @@ lazy val root = project.in(file(".")).aggregate(
   publishLocal := {}
 )
 
-val circeVersion = "0.14.0"
+val circeVersion = "0.14.1"
 
 val unusedWarnings = (
   "-Ywarn-unused" ::
