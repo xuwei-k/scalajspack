@@ -1,5 +1,3 @@
-import sbtcrossproject.crossProject
-
 lazy val root = project.in(file(".")).aggregate(
   scalajspackJS,
   scalajspackJVM
