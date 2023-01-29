@@ -1,5 +1,5 @@
 addSbtPlugin("org.scala-js" % "sbt-scalajs" % "1.13.0")
-addSbtPlugin("com.github.scalaprops" % "sbt-scalaprops" % "0.4.3")
+addSbtPlugin("com.github.scalaprops" % "sbt-scalaprops" % "0.4.4")
 addSbtPlugin("org.portable-scala" % "sbt-scalajs-crossproject" % "1.2.0")
 
 scalacOptions ++= (
