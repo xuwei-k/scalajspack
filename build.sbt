@@ -15,7 +15,7 @@ val unusedWarnings = (
 
 lazy val scalajspack = crossProject(JSPlatform, JVMPlatform).in(file(".")).settings(
   name := "scalajspack",
-  scalaVersion := "2.13.10",
+  scalaVersion := "2.13.11",
   fullResolvers ~= {_.filterNot(_.name == "jcenter")},
   licenses := Seq("MIT License" -> url("https://opensource.org/licenses/mit-license")),
   scalacOptions ++= (
