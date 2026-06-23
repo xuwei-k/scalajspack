@@ -1,12 +1,13 @@
 val genHtmlLocal = TaskKey[Unit]("genHtmlLocal")
 
-genHtmlLocal := {
-  val js = "./js/target/scala-2.13/scalajspack-fastopt.js"
-  val html = gen(js)
+genHtmlLocal := Def.uncached {
+  val js = (LocalProject("scalajspackJS2_13") / Compile / fastLinkJSOutput).value / "main.js"
+  val Some(jsPath) = IO.relativize((LocalRootProject / baseDirectory).value, js).runtimeChecked
+  val html = gen(jsPath)
   IO.write(file("index.html"), html)
 }
 
-TaskKey[Unit]("genAndCheckHtml") := {
+TaskKey[Unit]("genAndCheckHtml") := Def.uncached {
   genHtmlLocal.value
   val diff = sys.process.Process("git diff").!!
   if (diff.nonEmpty) {
@@ -14,8 +15,8 @@ TaskKey[Unit]("genAndCheckHtml") := {
   }
 }
 
-TaskKey[Unit]("genHtmlPublish") := {
-  val js = "./scalajspack.js"
+TaskKey[Unit]("genHtmlPublish") := Def.uncached {
+  val js = "./main.js"
   val html = gen(js)
   IO.write(file("index.html"), html)
 }
