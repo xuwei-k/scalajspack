@@ -9,7 +9,7 @@ genHtmlLocal := {
 TaskKey[Unit]("genAndCheckHtml") := {
   genHtmlLocal.value
   val diff = sys.process.Process("git diff").!!
-  if(diff.nonEmpty){
+  if (diff.nonEmpty) {
     sys.error("Working directory is dirty!\n" + diff)
   }
 }
