@@ -73,7 +73,7 @@ object ScalajspackTest extends Scalaprops {
   implicit val jsArrayArb: Gen[List[Json]] =
     Gen.listOfN(5, jsValueArb)
 
-  val test = Property.forAll { json: Json =>
+  val test = Property.forAll { (json: Json) =>
     val S = Scalajspack.serialize(UnpackOptions.default)
     val actual = S.pack(json).flatMap(S.unpack)
     val r = actual == Attempt.successful(json)
