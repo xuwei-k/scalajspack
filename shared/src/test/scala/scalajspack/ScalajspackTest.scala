@@ -1,8 +1,11 @@
 package scalajspack
 
-import io.circe.{Json, JsonObject}
+import io.circe.Json
+import io.circe.JsonObject
 import scodec.Attempt
-import scalaprops.{Scalaprops, Property, Gen}
+import scalaprops.Scalaprops
+import scalaprops.Property
+import scalaprops.Gen
 
 object ScalajspackTest extends Scalaprops {
 
@@ -39,12 +42,15 @@ object ScalajspackTest extends Scalaprops {
     )
 
   private[this] val jsObjectArb1: Gen[JsonObject] =
-    Gen.listOfN(
-      5,
-      Gen.tuple2(
-        Gen[String], jsValuePrimitivesArb
+    Gen
+      .listOfN(
+        5,
+        Gen.tuple2(
+          Gen[String],
+          jsValuePrimitivesArb
+        )
       )
-    ).map(list => JsonObject.fromIterable(list))
+      .map(list => JsonObject.fromIterable(list))
 
   private[this] val jsArrayArb1: Gen[List[Json]] =
     Gen.listOfN(5, jsValuePrimitivesArb)
@@ -57,15 +63,17 @@ object ScalajspackTest extends Scalaprops {
     )
 
   implicit val jsObjectArb: Gen[JsonObject] =
-    Gen.listOfN(
-      5,
-      Gen.tuple2(Gen[String], jsValueArb)
-    ).map(list => JsonObject.fromIterable(list))
+    Gen
+      .listOfN(
+        5,
+        Gen.tuple2(Gen[String], jsValueArb)
+      )
+      .map(list => JsonObject.fromIterable(list))
 
   implicit val jsArrayArb: Gen[List[Json]] =
     Gen.listOfN(5, jsValueArb)
 
-  val test = Property.forAll{ json: Json =>
+  val test = Property.forAll { json: Json =>
     val S = Scalajspack.serialize(UnpackOptions.default)
     val actual = S.pack(json).flatMap(S.unpack)
     val r = actual == Attempt.successful(json)

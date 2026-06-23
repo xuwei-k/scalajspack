@@ -1,6 +1,7 @@
 package scalajspack
 
-import scodec.{Attempt, Err}
+import scodec.Attempt
+import scodec.Err
 import io.circe.Json
 import scodec.msgpack._
 import scodec.bits.BitVector
@@ -8,7 +9,7 @@ import scodec.bits.BitVector
 final class Scalajspack(serialize: Serialize[Json] = Scalajspack.default) {
 
   def json2msgpackBitVector(json: Json): Attempt[BitVector] =
-    serialize.pack(json).flatMap{ b =>
+    serialize.pack(json).flatMap { b =>
       scodec.msgpack.codecs.MessagePackCodec.encode(b)
     }
 
@@ -33,14 +34,14 @@ object Scalajspack {
   val byte2string: Array[Byte] => String = { bytes =>
     val builder = new StringBuilder
     var i = 0
-    while(i < bytes.length){
+    while (i < bytes.length) {
       builder.append("%02x".format(bytes(i) & 0xff))
       i += 1
     }
     builder.toString
   }
 
-  def serialize(options: UnpackOptions): Serialize[Json] = new Serialize[Json]{
+  def serialize(options: UnpackOptions): Serialize[Json] = new Serialize[Json] {
     private[this] val MNilSuccess = Attempt.successful(MNil)
     private[this] val MTrueSuccess = Attempt.successful(MTrue)
     private[this] val MFalseSuccess = Attempt.successful(MFalse)
@@ -54,13 +55,14 @@ object Scalajspack {
 
     def pack(json: Json): Attempt[MessagePack] = json.fold(
       jsonNull = MNilSuccess,
-      jsonBoolean = value => if(value) MTrueSuccess else MFalseSuccess,
-      jsonNumber = value => value.toLong match {
-        case Some(n) =>
-          Serialize[Long].pack(n)
-        case None =>
-          Serialize[Double].pack(value.toDouble)
-      },
+      jsonBoolean = value => if (value) MTrueSuccess else MFalseSuccess,
+      jsonNumber = value =>
+        value.toLong match {
+          case Some(n) =>
+            Serialize[Long].pack(n)
+          case None =>
+            Serialize[Double].pack(value.toDouble)
+        },
       jsonString = value => Serialize[String].pack(value),
       jsonArray = value => arraySerialize.pack(value.toVector),
       jsonObject = value => objectSerialize.pack(value.toMap)
@@ -71,8 +73,8 @@ object Scalajspack {
       def string(i: String) = Attempt.successful(Json.fromString(i))
       def array(a: Vector[MessagePack]) = a match {
         case h +: t =>
-          t.foldLeft(unpack(h).map(Vector(_))){
-            (r, m) => for{
+          t.foldLeft(unpack(h).map(Vector(_))) { (r, m) =>
+            for {
               x <- r
               y <- unpack(m)
             } yield x :+ y
@@ -82,16 +84,15 @@ object Scalajspack {
       }
       def map(m: Map[MessagePack, MessagePack]) = Attempt.successful(
         Json.fromFields(
-          m.map {
-            case (k, v) =>
-              unpack(k).flatMap { x =>
-                x.asString match {
-                  case Some(z) =>
-                    Attempt.successful(z)
-                  case None =>
-                    options.nonStringKey(x)
-                }
-              }.require -> unpack(v).require
+          m.map { case (k, v) =>
+            unpack(k).flatMap { x =>
+              x.asString match {
+                case Some(z) =>
+                  Attempt.successful(z)
+                case None =>
+                  options.nonStringKey(x)
+              }
+            }.require -> unpack(v).require
           }
         ) // TODO should not use require inside map
       )
