@@ -20,7 +20,7 @@ object ScalajspackTest extends Scalaprops {
   private[this] implicit val bigDecimalGen: Gen[BigDecimal] =
     Gen[Double].map(BigDecimal(_))
 
-  private[this] implicit val stringGen = Gen.alphaNumString
+  private[this] implicit val stringGen: Gen[String] = Gen.alphaNumString
 
   private[this] val jsonNumberGen: Gen[Json] =
     Gen.oneOf(
