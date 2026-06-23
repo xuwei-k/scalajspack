@@ -38159,4 +38159,4 @@ var $d_sjs_js_WrappedArray = new $TypeData().i($c_sjs_js_WrappedArray, "scala.sc
 }));
 ScalajspackMain = $m_Lscalajspack_Main$();
 }).call(this);
-//# sourceMappingURL=scalajspack-opt.js.map
+//# sourceMappingURL=main.js.map
