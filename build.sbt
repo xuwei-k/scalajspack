@@ -10,7 +10,7 @@ val unusedWarnings = Seq(
   "-Wunused:imports",
 )
 
-val scalaVersions = Seq("2.13.18")
+val scalaVersions = Seq("3.9.0")
 
 lazy val scalajspack = projectMatrix
   .in(file("core"))
