@@ -4,7 +4,7 @@ lazy val scalajspackRoot = rootProject.autoAggregate.settings(
   publishLocal := {},
 )
 
-val circeVersion = "0.14.16"
+val circeVersion = "0.14.17"
 
 val unusedWarnings = Seq(
   "-Wunused:imports",
