@@ -24,7 +24,7 @@ lazy val scalajspack = projectMatrix
     ),
     scalacOptions ++= unusedWarnings,
     libraryDependencies ++= Seq(
-      "com.github.scalaprops" %% "scalaprops" % "0.11.1" % "test",
+      "com.github.scalaprops" %% "scalaprops" % "0.12.0" % "test",
       "com.github.xuwei-k" %% "scodec-msgpack" % "0.8.0",
       "io.circe" %% "circe-parser" % circeVersion,
     ),
